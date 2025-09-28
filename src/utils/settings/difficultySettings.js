@@ -16,8 +16,8 @@ const gridDimensions = {
 };
 
 // recupera numero di celle della griglia in base alla difficoltà selezionata
-function getTotalCells() {
-  return difficultyLevels[currentDifficulty];
+function getTotalCells(difficulty) {
+  return difficultyLevels[difficulty || currentDifficulty];
 }
 
 // recupera numero di celle per lato (griglia quadrata) in base alla difficoltà selezionata

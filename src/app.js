@@ -3,6 +3,11 @@ import { generateBombPositions } from "./utils/cells/index.js";
 import { bombCount, getTotalCells } from "./utils/settings/index.js";
 
 export function startGame(difficulty) {
+  const gameState = {
+    isGameOver: false,
+    difficulty: difficulty,
+  };
+
   // recupero numero di celle in base alla difficoltà corrente
   const totalCells = getTotalCells(difficulty);
 
@@ -10,10 +15,9 @@ export function startGame(difficulty) {
   const bombs = generateBombPositions(bombCount, totalCells);
 
   // creazione griglia e passaggio posizioni bombe
-  const grid = createGrid(difficulty, bombs);
+  const grid = createGrid(difficulty, bombs, gameState);
 
-  return { grid, bombs };
+  return { grid, bombs, gameState };
 }
 
-const gameState = startGame("hard");
-console.log("Bombs", gameState.bombs);
+const gameState = startGame("medium");

@@ -3,8 +3,9 @@ export function generateBombPositions(numberOfBombs, totalCells) {
   const bombPositions = new Set();
 
   // generazione casuale dell'indice che identifica la cella che conterrà la bomba
-  const chooseRandomCell = (numberOfCells) =>
-    Math.floor(Math.random() * numberOfCells);
+  const chooseRandomCell = (numberOfCells) => {
+    return Math.floor(Math.random() * numberOfCells);
+  };
 
   // creazione dell'array di indici
   while (bombPositions.size < numberOfBombs) {

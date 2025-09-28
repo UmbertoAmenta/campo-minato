@@ -1,6 +1,7 @@
 import { getTotalCells, setDifficulty } from "../settings/index.js";
+import { revealCell } from "../cells/index.js";
 
-export function createGrid(difficulty, bombPositions) {
+export function createGrid(difficulty, bombPositions, gameState) {
   // selezione elemento .grid, reset di griglia e difficoltà, aggiunta difficoltà selezionata
   const grid = document.querySelector(".grid");
   grid.innerHTML = "";
@@ -15,6 +16,7 @@ export function createGrid(difficulty, bombPositions) {
   for (let i = 0; i < totalCells; i++) {
     const cell = document.createElement("div");
     cell.classList.add("cell");
+    cell.dataset.index = i.toString();
 
     // distinzione tra celle con/senza bomba
     if (bombPositions.includes(i)) {
@@ -25,6 +27,15 @@ export function createGrid(difficulty, bombPositions) {
 
     grid.appendChild(cell);
   }
+
+  // aggiunta evento click sulla cella
+  grid.querySelectorAll(".cell").forEach((cell) => {
+    cell.addEventListener("click", () => {
+      if (!gameState.isGameOver) {
+        revealCell(cell, bombPositions, gameState);
+      }
+    });
+  });
 
   return grid;
 }
